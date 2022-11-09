@@ -55,12 +55,15 @@ resource "aws_s3_bucket" "wri_image" {
   }
 }
 
-# resource "aws_s3_bucket" "hilton-apac-contents" {
-#   bucket = "apac-contents"
-#   tags   = {
-#           "project" = "apac" 
-#         }
-# }
+resource "aws_s3_bucket_website_configuration" "wri_image" {
+  bucket = aws_s3_bucket.wri_image.bucket
+
+  index_document {
+    suffix = "index.html"
+  }
+
+}
+
 
 resource "aws_s3_bucket_acl" "hilton_apac_acl" {
   bucket = aws_s3_bucket.wri_image.id
